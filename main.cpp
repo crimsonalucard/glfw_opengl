@@ -11,8 +11,6 @@ void processInput(GLFWwindow *window) {
     }
 }
 
-#include <stdio.h>
-
 int main() {
 
     GLFWwindow* window = createWindow(800, 640, "hello triangle");
@@ -20,13 +18,20 @@ int main() {
     initGlew();
 
     /* geometry to use. these are 3 xyz points (9 floats total) to make a triangle */
-    GLfloat points[] = { 0.0f, 0.5f, 0.0f, 0.5f, -0.5f, 0.0f, -0.5f, -0.5f, 0.0f };
-    GLuint vertex_attribute_object = loadTrianglesVertices(points, sizeof(points));
+    GLfloat points[] = { 0.0f, 0.5f, 0.0f,
+                         0.5f, -0.5f, 0.0f,
+                         -0.5f, -0.5f, 0.0f };
+    GLfloat colors[] = {1.0f, 0.0f, 0.0f,
+                      0.0f, 1.0f, 0.0f,
+                      0.0f, 0.0f, 1.0f};
+    GLuint vertex_attribute_object = loadTrianglesVertices(points, colors, sizeof(points));
 
 
     GLuint vertexShader = getShaderFromFileString("vertex.glsl", GL_VERTEX_SHADER);
     GLuint fragmentShader = getShaderFromFileString("fragment.glsl", GL_FRAGMENT_SHADER);
     GLuint shaderProgram = createShaderProgram({vertexShader, fragmentShader});
+
+
 
 
     while ( !glfwWindowShouldClose( window ) ) {

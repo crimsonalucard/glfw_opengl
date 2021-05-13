@@ -15,6 +15,10 @@ GLuint createShaderProgram(const std::initializer_list<GLuint> &shaderList) {
     for (GLuint shader : shaderList){
         glAttachShader(shaderProgram, shader);
     }
+
+    glBindAttribLocation(shaderProgram, 0, "vertex_position");
+    glBindAttribLocation(shaderProgram, 1, "vertex_color");
+
     glLinkProgram(shaderProgram);
     return shaderProgram;
 }
