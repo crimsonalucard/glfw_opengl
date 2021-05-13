@@ -13,17 +13,18 @@ void processInput(GLFWwindow *window) {
 
 int main() {
 
-    GLFWwindow* window = createWindow(800, 640, "hello triangle");
+    GLFWwindow *window = createWindow(800, 640, "hello triangle");
 
     initGlew();
 
     /* geometry to use. these are 3 xyz points (9 floats total) to make a triangle */
-    GLfloat points[] = { 0.0f, 0.5f, 0.0f,
-                         0.5f, -0.5f, 0.0f,
-                         -0.5f, -0.5f, 0.0f };
+    GLfloat points[] = {0.0f, 0.5f, 0.0f,
+                        -0.5f, -0.5f, 0.0f,
+                        0.5f, -0.5f, 0.0f,
+    };
     GLfloat colors[] = {1.0f, 0.0f, 0.0f,
-                      0.0f, 1.0f, 0.0f,
-                      0.0f, 0.0f, 1.0f};
+                        0.0f, 1.0f, 0.0f,
+                        0.0f, 0.0f, 1.0f};
     GLuint vertex_attribute_object = loadTrianglesVertices(points, colors, sizeof(points));
 
 
@@ -32,19 +33,17 @@ int main() {
     GLuint shaderProgram = createShaderProgram({vertexShader, fragmentShader});
 
 
-
-
-    while ( !glfwWindowShouldClose( window ) ) {
+    while (!glfwWindowShouldClose(window)) {
         /* wipe the drawing surface clear */
-        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-        glUseProgram(shaderProgram );
-        glBindVertexArray(vertex_attribute_object );
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glUseProgram(shaderProgram);
+        glBindVertexArray(vertex_attribute_object);
         /* draw points 0-3 from the currently bound VAO with current in-use shader */
-        glDrawArrays( GL_TRIANGLES, 0, 3 );
+        glDrawArrays(GL_TRIANGLES, 0, 3);
         /* update other events like input handling */
         glfwPollEvents();
         /* put the stuff we've been drawing onto the display */
-        glfwSwapBuffers( window );
+        glfwSwapBuffers(window);
     }
 
     /* close GL context and any other GLFW resources */

@@ -10,6 +10,7 @@ void initGlew() {
     /* tell GL to only draw onto a pixel if the shape is closer to the viewer
 than anything already drawn at that pixel */
     glEnable(GL_DEPTH_TEST); /* enable depth-testing */
+    glEnable(GL_CULL_FACE);
     /* with LESS depth-testing interprets a smaller depth value as meaning "closer" */
     glDepthFunc(GL_LESS);
 
