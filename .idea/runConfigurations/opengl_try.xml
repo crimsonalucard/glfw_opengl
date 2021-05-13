@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="opengl_try" type="CMakeRunConfiguration" factoryName="Application" singleton="false" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="opengl_try" TARGET_NAME="opengl_try" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="opengl_try" RUN_TARGET_NAME="opengl_try">
+    <envs>
+      <env name="__NV_PRIME_RENDER_OFFLOAD" value="1" />
+      <env name="__VK_LAYER_NV_optimus" value="NVIDIA_only" />
+      <env name=" __GLX_VENDOR_LIBRARY_NAME" value="nvidia" />
+    </envs>
+    <method v="2">
+      <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+    </method>
+  </configuration>
+</component>
