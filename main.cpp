@@ -34,6 +34,8 @@ int main() {
 
 
     while (!glfwWindowShouldClose(window)) {
+        processInput(window);
+
         /* wipe the drawing surface clear */
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(shaderProgram);
