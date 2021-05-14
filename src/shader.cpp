@@ -1,18 +1,5 @@
 #include <shader.h>
-
-void _print_program_info_log(GLuint program){
-    int actual_length;
-    char log[2048];
-    glGetProgramInfoLog(program, 2048, &actual_length, log);
-    printf("program info log for GL index %u:\n%s", program, log);
-}
-
-void _print_shader_info_log(GLuint shader_index){
-    int actual_length;
-    char log[2048];
-    glGetShaderInfoLog(shader_index, 2048, &actual_length, log);
-    printf("shader info log for GL index %u:%s\n", shader_index, log);
-}
+#include <logging.h>
 
 GLuint getShaderFromFileString(std::string fileName, GLuint GL_TYPE_SHADER) {
     auto shaderSrc = readFromFile(fileName);
@@ -23,8 +10,8 @@ GLuint getShaderFromFileString(std::string fileName, GLuint GL_TYPE_SHADER) {
     int params = -1;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &params);
     if(GL_TRUE != params){
-        fprintf(stderr, "ERROR: GL shader index %i did not compile\n", shader);
-        _print_shader_info_log(shader);
+        fprintf(stderr, "ERROR: GL shader mIndex %i did not compile\n", shader);
+        print_shader_info_log(shader);
         exit(1);
     }
     return shader;
@@ -44,9 +31,22 @@ GLuint createShaderProgram(const std::initializer_list<GLuint> &shaderList) {
     int params = -1;
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &params);
     if(GL_TRUE != params){
-        fprintf(stderr, "ERROR: could not link shader program GL index %u\n", shaderProgram);
-        _print_program_info_log(shaderProgram);
+        fprintf(stderr, "ERROR: could not link shader program GL mIndex %u\n", shaderProgram);
+        print_program_info_log(shaderProgram);
         exit(1);
     }
     return shaderProgram;
+}
+
+//computationally expensive only use during development.
+bool is_valid(GLuint program){
+    glValidateProgram(program);
+    int params = -1;
+    glGetProgramiv(program, GL_VALIDATE_STATUS, &params);
+    printf("program %i GL_VALIDATE_STATUS = %i\n", program, params);
+    if(GL_TRUE != params){
+        print_program_info_log(program);
+        return false;
+    }
+    return true;
 }

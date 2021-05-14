@@ -3,6 +3,7 @@
 #include <window.h>
 #include <initGL.h>
 #include <loadVertices.h>
+#include <logging.h>
 
 
 void processInput(GLFWwindow *window) {
