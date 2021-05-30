@@ -1,5 +1,6 @@
 #include <shader.h>
 #include <logging.h>
+#include <functional>
 
 GLuint getShaderFromFileString(std::string fileName, GLuint GL_TYPE_SHADER) {
     auto shaderSrc = readFromFile(fileName);
@@ -36,6 +37,20 @@ GLuint createShaderProgram(const std::initializer_list<GLuint> &shaderList) {
         exit(1);
     }
     return shaderProgram;
+}
+
+GLuint createShaderProgramFromFileStrings(std::string vertexShaderString, std::string fragmentShaderString){
+    auto vertexShader = getShaderFromFileString(vertexShaderString, GL_VERTEX_SHADER);
+    auto fragmentShader = getShaderFromFileString(fragmentShaderString, GL_FRAGMENT_SHADER);
+    return createShaderProgram({vertexShader, fragmentShader});
+}
+
+void reloadShaderProgramFromFiles(GLuint* shaderProgram, std::string vertexShaderString, std::string fragmentShaderString){
+    auto newShaderProgram = createShaderProgramFromFileStrings(vertexShaderString, fragmentShaderString);
+    if(newShaderProgram){
+        glDeleteProgram(*shaderProgram);
+        *shaderProgram = newShaderProgram;
+    }
 }
 
 //computationally expensive only use during development.
